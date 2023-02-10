@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 //Routes
 import gamesRouter from "./routes/gamesRoutes.js";
+import customersRouter from "./routes/customersRoutes.js";
 
 dotenv.config();
 
@@ -11,7 +12,7 @@ const server = express();
 
 server.use(cors());
 server.use(express.json());
-server.use(gamesRouter);
+server.use([gamesRouter, customersRouter]);
 
 server.listen(
   process.env.PORT,
