@@ -19,6 +19,6 @@ customersRouter.post(
 );
 customersRouter.get("/customers", getCustomers);
 customersRouter.get("/customers/:id", checkCustomerExistenceById, getCustomerById);
-customersRouter.put("/customers", updateCustomer)
+customersRouter.put("/customers/:id", checkCustomerExistenceById, updateCustomer)
 
 export default customersRouter;

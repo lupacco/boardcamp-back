@@ -5,7 +5,7 @@ export async function createCustomer(req, res) {
 
   try {
     const customer = await db.query(
-      `INSERT INTO customers (name, phone, "cpf", "birthday") VALUES ('${name}', '${phone}', '${cpf}', '${birthday}')`
+      `INSERT INTO customers (name, phone, "cpf", "birthday") VALUES ($1, $2, $3, $4)`, [name,phone,cpf,birthday]
     );
 
     return res.sendStatus(201);
