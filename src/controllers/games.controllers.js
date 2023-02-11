@@ -20,8 +20,6 @@ export async function getGames(req, res) {
   try {
     const games = await db.query(`SELECT * FROM games`);
 
-    console.log(games.rows);
-
     return res.status(200).send(games.rows);
   } catch (err) {
     console.log(err);

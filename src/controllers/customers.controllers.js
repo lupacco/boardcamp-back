@@ -5,12 +5,13 @@ export async function createCustomer(req, res) {
 
   try {
     const customer = await db.query(
-      `INSERT INTO customers (name, phone, "cpf", "birthday") VALUES ($1, $2, $3, $4)`, [name,phone,cpf,birthday]
+      `INSERT INTO customers (name, phone, "cpf", "birthday") VALUES ($1, $2, $3, $4)`,
+      [name, phone, cpf, birthday]
     );
 
     return res.sendStatus(201);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     return res.sendStatus(500);
   }
 }
@@ -28,17 +29,22 @@ export async function getCustomers(req, res) {
 
 export async function getCustomerById(req, res) {
   const customer = req.customer;
-  
-  try{
-      return res.status(200).send(customer)
-  }catch(err){
-      console.log(err)
-      return res.sendStatus(500)
+
+  try {
+    return res.status(200).send(customer);
+  } catch (err) {
+    console.log(err);
+    return res.sendStatus(500);
   }
 }
 
 export async function updateCustomer(req, res) {
+  const { id } = req.params;
+  const newData = req.body  
   try {
+    await db.query(``,[id, newData.name, newData.phone, newData.cpf, newData.birthday])
+    console.log(newData)
+
     return res.sendStatus(200);
   } catch (err) {
     console.log(err);

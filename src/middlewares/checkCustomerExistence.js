@@ -21,7 +21,7 @@ export async function checkCustomerExistenceById(req, res, next){
     const { id } = req.params;
 
     try{
-        let item = await db.query(`SELECT * FROM customers WHERE id = '${id}'`)
+        let item = await db.query(`SELECT * FROM customers WHERE id = $1`, [id])
         let customerExist = item.rowCount
         
         if(!customerExist) return res.sendStatus(404)
