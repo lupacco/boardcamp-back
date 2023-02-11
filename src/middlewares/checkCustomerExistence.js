@@ -26,8 +26,6 @@ export async function checkCustomerExistenceById(req, res, next){
         
         if(!customerExist) return res.sendStatus(404)
 
-        console.log(item.rows[0])
-
         req.customer = item.rows[0]
 
         next()
