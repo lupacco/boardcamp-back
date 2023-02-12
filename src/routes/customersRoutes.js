@@ -30,6 +30,7 @@ customersRouter.put(
   "/customers/:id",
   checkCustomerExistenceById,
   validateSchema(customerSchema),
+  checkCustomerExistence,
   updateCustomer
 );
 

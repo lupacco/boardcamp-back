@@ -7,6 +7,8 @@ export async function checkCustomerExistence(req, res, next){
         let itemName = await db.query(`SELECT * FROM customers WHERE cpf = $1`, [customerCpf])
         let customerExist = itemName.rowCount
 
+        console.log(req)
+
         if(customerExist) return res.sendStatus(409)
 
         next()
