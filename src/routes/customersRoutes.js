@@ -6,6 +6,7 @@ import {
   updateCustomer,
 } from "../controllers/customers.controllers.js";
 import {
+    checkCustomerCpf,
   checkCustomerExistence,
   checkCustomerExistenceById,
 } from "../middlewares/checkCustomerExistence.js";
@@ -28,9 +29,9 @@ customersRouter.get(
 );
 customersRouter.put(
   "/customers/:id",
-  checkCustomerExistenceById,
   validateSchema(customerSchema),
-  checkCustomerExistence,
+  checkCustomerExistenceById,
+  checkCustomerCpf,
   updateCustomer
 );
 
