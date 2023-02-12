@@ -4,12 +4,12 @@ export async function createCustomer(req, res) {
   const { name, phone, cpf, birthday } = req.body;
 
   try {
-    const customer = await db.query(
-      `INSERT INTO customers (name, phone, "cpf", "birthday") VALUES ($1, $2, $3, $4)`,
-      [name, phone, cpf, birthday]
-    );
-
+    await db.query(
+        `INSERT INTO customers (name, phone, cpf, birthday) VALUES ($1, $2, $3, $4)`,
+        [name, phone, cpf, birthday]
+        );
     return res.sendStatus(201);
+
   } catch (err) {
     console.log(err);
     return res.sendStatus(500);

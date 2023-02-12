@@ -1,11 +1,10 @@
 import { db } from "../config/database.connection.js";
 
 export async function checkCustomerExistence(req, res, next){
-    const url = req.url.slice(1)
     const customerCpf = req.body.cpf
 
     try{
-        let itemName = await db.query(`SELECT * FROM customer WHERE cpf = '${customerCpf}'`)
+        let itemName = await db.query(`SELECT * FROM customers WHERE cpf = $1`, [customerCpf])
         let customerExist = itemName.rowCount
 
         if(customerExist) return res.sendStatus(409)

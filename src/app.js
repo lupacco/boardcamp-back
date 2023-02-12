@@ -5,6 +5,7 @@ import cors from "cors";
 //Routes
 import gamesRouter from "./routes/gamesRoutes.js";
 import customersRouter from "./routes/customersRoutes.js";
+import rentalsRouter from "./routes/rentalsRoutes.js";
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ const server = express();
 
 server.use(cors());
 server.use(express.json());
-server.use([gamesRouter, customersRouter]);
+server.use([gamesRouter, customersRouter, rentalsRouter]);
 
 server.listen(
   process.env.PORT,
