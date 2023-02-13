@@ -2,7 +2,6 @@ import { db } from "../../config/database.connection.js";
 import { getRentalsQuery } from "./utils/getRentalsQuery.js";
 import dayjs from "dayjs";
 
-
 export async function createRental(req, res){
     const {customerId, gameId, daysRented} = req.body
     const today = dayjs(new Date()).format('YYYY/MM/DD')
@@ -38,6 +37,40 @@ export async function getRentals(req, res){
     }
 }
 
-export async function finalizeRental(req, res){}
+export async function finalizeRental(req, res){
+    const rental = req.rental
+    const today = dayjs(new Date).format('YYYY/MM/DD')
+    try{
+        const rentDate = dayjs(rental.rentDate).format('YYYY/MM/DD')
+        const expectedReturnDate = dayjs(rentDate).add(rental.daysRented, 'day')
 
-export async function deleteRental(req, res){}
+        let delayDays = dayjs(today).diff(expectedReturnDate, 'day')
+
+        if(delayDays < 0) delayDays = 0
+
+        const gamePriceQuery = await db.query(`SELECT "pricePerDay" from games WHERE id=$1`, [rental.gameId])
+        const gamePricePerDay = gamePriceQuery.rows[0].pricePerDay
+
+        const delayFee = delayDays*gamePricePerDay
+
+        await db.query(`UPDATE rentals SET "returnDate"=$1, "delayFee"=$2 WHERE id=$3`, [today, delayFee, rental.id])
+
+        return res.sendStatus(200)
+    }catch(err){
+        console.log(err)
+        return res.sendStatus(500)
+    }
+}
+
+export async function deleteRental(req, res){
+    const rental = req.rental
+
+    try{
+        await db.query(`DELETE FROM rentals WHERE id=$1`, [rental.id])
+        
+        return res.sendStatus(200)
+    }catch(err){
+        console.log(err)
+        return res.sendStatus(500)
+    }
+}
