@@ -18,7 +18,9 @@ export async function checkCustomerExistence(req, res, next){
 }
 
 export async function checkCustomerExistenceById(req, res, next){
-    const { id } = req.params;
+    let { id } = req.params;
+    
+    if(!id) id = req.body.customerId
 
     try{
         let item = await db.query(`SELECT * FROM customers WHERE id = $1`, [id])
