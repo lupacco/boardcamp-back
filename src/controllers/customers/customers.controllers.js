@@ -1,4 +1,4 @@
-import { db } from "../config/database.connection.js";
+import { db } from "../../config/database.connection.js";
 
 export async function createCustomer(req, res) {
   const { name, phone, cpf, birthday } = req.body;

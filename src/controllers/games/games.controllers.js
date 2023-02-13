@@ -1,4 +1,4 @@
-import { db } from "../config/database.connection.js";
+import { db } from "../../config/database.connection.js";
 
 export async function createGame(req, res) {
   const { name, image, stockTotal, pricePerDay } = req.body;

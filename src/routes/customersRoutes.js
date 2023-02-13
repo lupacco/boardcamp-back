@@ -4,7 +4,7 @@ import {
   getCustomerById,
   getCustomers,
   updateCustomer,
-} from "../controllers/customers.controllers.js";
+} from "../controllers/customers/customers.controllers.js";
 import {
     checkCustomerCpf,
   checkCustomerExistence,
