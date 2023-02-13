@@ -9,13 +9,10 @@ export async function createRental(req, res){
 
     try{
         console.log(req.body)
-        console.log(today)
 
         const gameRented = await db.query(`SELECT * FROM games WHERE id=$1`, [gameId])
         const gamePricePerDay = gameRented.rows[0].pricePerDay
 
-        console.log(typeof Number(daysRented))
-        console.log(typeof gamePricePerDay)
 
         await db.query(`
             INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee") VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -32,10 +29,7 @@ export async function getRentals(req, res){
     try{
         const rentals = await db.query(getRentalsQuery)
 
-        
         const rentalsFormated = rentals.rows
-
-        console.log(rentalsFormated)
 
         return res.status(200).send(rentalsFormated)
     }catch(err){

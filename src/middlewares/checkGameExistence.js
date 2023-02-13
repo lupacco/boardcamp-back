@@ -22,7 +22,7 @@ export async function checkGameExistenceById(req, res, next){
         const gameQuery = await db.query(`SELECT * FROM games WHERE id=$1`,[gameId])
         const gameExist = gameQuery.rowCount
 
-        if(!gameExist) return res.sendStatus(400)
+        if(!gameExist) return res.sendStatus(404)
         
         next()
     }catch(err){
