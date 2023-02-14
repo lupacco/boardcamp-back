@@ -15,9 +15,8 @@ server.use(cors());
 server.use(express.json());
 server.use([gamesRouter, customersRouter, rentalsRouter]);
 
-server.listen(
-  process.env.PORT,
-  () => console.log(`Server running on PORT: ${process.env.PORT}`)
+server.listen(process.env.PORT, () =>
+  console.log(`Server running on PORT: ${process.env.PORT}`)
 );
 
 // 200: Ok => Significa que deu tudo certo com a requisição

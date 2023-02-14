@@ -17,8 +17,14 @@ export async function createGame(req, res) {
 }
 
 export async function getGames(req, res) {
+  const {name} = req?.query
+  let query = `SELECT * FROM games`
+  
   try {
-    const games = await db.query(`SELECT * FROM games`);
+    if(name){
+      query += ` WHERE name ILIKE '${name}%'`
+    }
+    const games = await db.query(query);
 
     return res.status(200).send(games.rows);
   } catch (err) {

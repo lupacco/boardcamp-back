@@ -6,7 +6,7 @@ import {
   updateCustomer,
 } from "../controllers/customers/customers.controllers.js";
 import {
-    checkCustomerCpf,
+  checkCustomerCpf,
   checkCustomerExistence,
   checkCustomerExistenceById,
 } from "../middlewares/customerValidations.js";

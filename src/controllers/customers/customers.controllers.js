@@ -5,11 +5,10 @@ export async function createCustomer(req, res) {
 
   try {
     await db.query(
-        `INSERT INTO customers (name, phone, cpf, birthday) VALUES ($1, $2, $3, $4)`,
-        [name, phone, cpf, birthday]
-        );
+      `INSERT INTO customers (name, phone, cpf, birthday) VALUES ($1, $2, $3, $4)`,
+      [name, phone, cpf, birthday]
+    );
     return res.sendStatus(201);
-
   } catch (err) {
     console.log(err);
     return res.sendStatus(500);
@@ -40,9 +39,12 @@ export async function getCustomerById(req, res) {
 
 export async function updateCustomer(req, res) {
   const { id } = req.params;
-  const newData = req.body  
+  const newData = req.body;
   try {
-    await db.query(`UPDATE customers SET name=$1, phone=$2, cpf=$3, birthday=$4 WHERE id = $5`,[newData.name, newData.phone, newData.cpf, newData.birthday, id])
+    await db.query(
+      `UPDATE customers SET name=$1, phone=$2, cpf=$3, birthday=$4 WHERE id = $5`,
+      [newData.name, newData.phone, newData.cpf, newData.birthday, id]
+    );
 
     return res.sendStatus(200);
   } catch (err) {

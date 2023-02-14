@@ -14,4 +14,4 @@ export const getRentalsQuery = `
     
     INNER JOIN customers ON rentals."customerId" = customers.id
     INNER JOIN games ON rentals."gameId" = games.id
-`
+`;
