@@ -37,8 +37,21 @@ export async function createRental(req, res) {
 }
 
 export async function getRentals(req, res) {
+  const {customerId, gameId} = req?.query
+
   try {
-    const rentals = await db.query(getRentalsQuery);
+    let query = getRentalsQuery
+
+    if(customerId){
+      query += `\nWHERE "customerId"='${customerId}'`//
+    }
+    if(gameId){
+      query += `\nWHERE "gameId"='${gameId}'`//
+    }
+
+    console.log(query)
+
+    const rentals = await db.query(query);
 
     const rentalsFormated = rentals.rows;
 
