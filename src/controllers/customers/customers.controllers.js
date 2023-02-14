@@ -16,8 +16,15 @@ export async function createCustomer(req, res) {
 }
 
 export async function getCustomers(req, res) {
+  const {cpf} = req?.query
+  let query = `SELECT * FROM customers`
+  
   try {
-    const customers = await db.query(`SELECT * FROM customers`);
+    if(query){
+      query += ` WHERE cpf ILIKE '${cpf}%'`
+    }
+
+    const customers = await db.query(query);
 
     return res.status(200).send(customers.rows);
   } catch (err) {

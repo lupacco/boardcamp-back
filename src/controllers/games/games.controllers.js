@@ -22,7 +22,7 @@ export async function getGames(req, res) {
   
   try {
     if(name){
-      query += ` WHERE name ILIKE '${name}%'`
+      query += ` WHERE name ILIKE '%${name}%'`
     }
     const games = await db.query(query);
 
