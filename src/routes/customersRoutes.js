@@ -9,7 +9,7 @@ import {
     checkCustomerCpf,
   checkCustomerExistence,
   checkCustomerExistenceById,
-} from "../middlewares/checkCustomerExistence.js";
+} from "../middlewares/customerValidations.js";
 import { validateSchema } from "../middlewares/validateSchema.js";
 import { customerSchema } from "../schemas/customerSchema.js";
 

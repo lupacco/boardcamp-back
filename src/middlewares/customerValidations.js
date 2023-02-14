@@ -38,12 +38,13 @@ export async function checkCustomerExistenceById(req, res, next){
 }
 
 export async function checkCustomerCpf(req, res, next){
-    const reqCpf = req.body.cpf
+    const customer = req.body
+    const {id} = req.params
 
     try{
-        const cpfInUse = await db.query(`SELECT * FROM customers WHERE cpf = $1`, [reqCpf])
+        const userUsingCpf = await db.query(`SELECT * FROM customers WHERE cpf = $1`, [customer.cpf])
 
-        if(cpfInUse.rowCount) return res.sendStatus(409)
+        if(userUsingCpf.rowCount && Number(id) !== userUsingCpf.rows[0].id) return res.sendStatus(409)
 
         next()
     }catch(err){
