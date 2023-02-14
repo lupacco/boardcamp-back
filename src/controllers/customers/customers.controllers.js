@@ -20,7 +20,7 @@ export async function getCustomers(req, res) {
   let query = `SELECT * FROM customers`
   
   try {
-    if(query){
+    if(cpf){
       query += ` WHERE cpf ILIKE '${cpf}%'`
     }
 

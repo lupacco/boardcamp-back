@@ -43,13 +43,11 @@ export async function getRentals(req, res) {
     let query = getRentalsQuery
 
     if(customerId){
-      query += `\nWHERE "customerId"='${customerId}'`//
+      query += `\nWHERE "customerId"='${customerId}'`
     }
     if(gameId){
-      query += `\nWHERE "gameId"='${gameId}'`//
+      query += `\nWHERE "gameId"='${gameId}'`
     }
-
-    console.log(query)
 
     const rentals = await db.query(query);
 
